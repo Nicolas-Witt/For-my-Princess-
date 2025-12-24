@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+   <link rel="shortcut icon" href="favicon.ico">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Para Eterna Dona</title>
+  <title>Para Minha Eterna Dona</title>
+
+  <!-- FONTES -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300;400;700&family=Marck+Script&display=swap" rel="stylesheet">
 
   <style>
     *{
@@ -47,7 +51,7 @@
 
     /* ======== SEÇÕES ======== */
     section{
-      max-width:480px; /* tamanho perfeito para celular */
+      max-width:480px;
       margin:auto;
       padding:50px 20px;
       opacity:0;
@@ -77,7 +81,7 @@
       font-style:italic;
     }
 
-    /* ======== GALERIA RESPONSIVA ======== */
+    /* ======== GALERIA ======== */
     .galeria{
       display:flex;
       flex-direction:column;
@@ -103,7 +107,7 @@
       margin-top:12px;
       text-align:center;
       font-style:italic;
-      min-height:40px;   /* espaço para você escrever */
+      min-height:40px;
       color:#444;
     }
 
@@ -121,7 +125,7 @@
       margin-right:auto;
     }
 
-    /* ===== MODAL ===== */
+    /* ===== MODAL MEMÓRIAS ===== */
     #memoriesModal{
       position:fixed;
       inset:0;
@@ -172,6 +176,100 @@
       font-style:italic;
       margin-bottom:20px;
     }
+
+    /* ================================================== */
+    /* ============== MODAL DO POEMA NOVO =============== */
+    /* ================================================== */
+
+    #poemModal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.60);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+    }
+
+    .poem-box{
+      position:relative;
+      background:linear-gradient(135deg,#ffffff,#f9f3f5,#fff7fa);
+      width:90%;
+      max-width:420px;
+      padding:35px 28px;
+      border-radius:26px;
+
+      /* brilho suave */
+      box-shadow:
+        0 0 20px rgba(255, 130, 170, 0.45),
+        0 0 45px rgba(255, 150, 190, 0.35),
+        0 0 12px rgba(255,100,150,0.25);
+
+      border:1px solid rgba(255,180,200,0.45);
+      text-align:center;
+      animation: poemOpen .55s ease;
+    }
+
+    @keyframes poemOpen{
+      from{ opacity:0; transform:scale(.85); }
+      to{ opacity:1; transform:scale(1); }
+    }
+
+    /* BOTÃO X */
+    .close-x{
+      position:absolute;
+      top:10px;
+      right:14px;
+      font-size:26px;
+      font-weight:bold;
+      color:#b43c68;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .close-x:hover{
+      transform:scale(1.2);
+      color:#922c54;
+    }
+
+    .poem-box h2{
+      font-family:"Great Vibes", cursive;
+      font-size:40px;
+      margin-bottom:18px;
+      color:#b43c68;
+      text-shadow:0 0 6px rgba(255,150,180,0.4);
+    }
+
+    .poem-text{
+      white-space:pre-line;
+      font-family:"Quicksand", sans-serif;
+      font-size:16px;
+      line-height:1.9;
+      color:#444;
+      font-weight:400;
+      margin-bottom:25px;
+      padding:0 6px;
+    }
+
+    .btn-poem{
+      margin-top:10px;
+      padding:12px 28px;
+      border-radius:28px;
+      font-size:16px;
+      border:none;
+      cursor:pointer;
+      background:#d8688d;
+      color:white;
+      box-shadow:0 5px 15px rgba(214,104,141,0.45);
+      transition:.3s;
+      font-family:"Quicksand", sans-serif;
+    }
+
+    .btn-poem:hover{
+      transform:scale(1.05);
+      background:#c9537c;
+    }
+
   </style>
 </head>
 
@@ -183,7 +281,7 @@
 <!-- ===== INTRO ===== -->
 <div id="intro">
   <div class="intro-box">
-    <p>Ti amo my 𝓡</p>
+    <p>Ti amo my  𝓡</p>
     <button onclick="startLove()">Começar nossa música</button>
   </div>
 </div>
@@ -192,29 +290,96 @@
   <source src="yuri.mp3" type="audio/mpeg">
 </audio>
 
-<section><h2>Para Minha Eterna Dona, meu amor,
-     eu me emocionei fazendo não nego isso, lembre que quando sentir saudade pode vir aqui rever nossas recordações;
-        Espero que Goste meu amor.
-        Te Amo Renata
-        by your pochacco...</h2></section>
-
 <section>
-  <h2>Minha Declaração</h2>
-  <div class="texto">Declaração aqui.</div>
+  <h2 style="white-space: pre-line; text-align: center; line-height: 1.8;">
+    Para Minha Eterna Dona, meu amor,
+    eu me emocionei fazendo, não nego isso.
+    Lembre que quando sentir saudade
+    pode vir aqui rever nossas recordações;
+    Espero que goste, meu amor.
+
+    Te Amo Renata
+    by your pochacco...
+  </h2>
 </section>
 
-<!-- ===== GALERIA CORRIGIDA ===== -->
+<section>
+  <h2 style="white-space: pre-line; text-align: center; line-height: 1.8;">Minha Declaração</h2>
+
+  <button class="btn-memories" onclick="openPoem()">Ler meu poema para você 💗</button>
+</section>
+
+<!-- ===== MODAL DO POEMA ===== -->
+<div id="poemModal">
+  <div class="poem-box">
+    <div class="close-x" onclick="closePoem()">×</div>
+
+    <h2>Para Minha Eterna Dona</h2>
+
+    <div class="poem-text">
+
+Minha dona, meu amor, meu abrigo silencioso,
+Desde o instante em que te encontrei, até hoje, até sempre,
+meu peito aprendeu um novo ritmo —
+o ritmo do teu nome batendo dentro de mim.
+
+Eu te amo no jeito mais simples e mais profundo,
+na pressa em te ver, na calma quando te escuto,
+na vontade boba de dividir o mesmo espaço,
+o mesmo quarto, o mesmo mundo com você.
+
+Teu coração, firme como pedra rara,
+às vezes parece difícil de decifrar…
+mas é por isso que eu te amo ainda mais:
+porque cada pequeno gesto teu vale um universo inteiro.
+E eu me dedico, me esforço, me moldo,
+só para ver um único sorriso teu nascer —
+um sorriso que acende todas as luzes dentro de mim.
+
+Nenhum elemento da natureza,
+nem o mar que engole horizontes,
+nem o vento que move florestas,
+nem as estrelas que desafiam a noite,
+superam a beleza que entorna você.
+Você é mais bonita que tudo o que existe;
+teu brilho não cansa, não apaga, não termina.
+
+Eu sou apaixonado pelo teu olhar,
+aquele olhar que faz o tempo parar
+e a minha alma respirar em silêncio —
+um silêncio bom, um silêncio de lar.
+
+Eu te quero em todos os meus amanhãs,
+nos meus passos apressados só pra chegar até você,
+nos meus sonhos que sempre te procuram,
+na minha vida inteira que sorri ao ouvir teu nome.
+
+Meu amor, minha vida, minha eternidade…
+o que eu sinto por você
+não envelhece, não diminui, não duvida.
+Só cresce, floresce e permanece.
+
+E eu prometo:
+enquanto eu existir,
+teu mundo nunca vai ser pequeno.
+Porque eu vou te amar
+com a força de tudo aquilo que não se mede.
+
+    </div>
+
+    <button class="btn-poem" onclick="closePoem()">Fechar</button>
+  </div>
+</div>
+
+<!-- ===== GALERIA ===== -->
 <section>
   <h2>Nossas Recordações</h2>
 
   <div class="galeria">
-
     <div class="foto-box">
       <img src="jogoveneno.jpeg">
       <div class="legenda"></div>
     </div>
-
-    
   </div>
 
   <button class="btn-memories" onclick="openMemories()">Ver nossas recordações 💞</button>
@@ -222,7 +387,7 @@
 
 <section id="final"><button class="btn-memories">…E Eternamente assim, no fim de tudo, é você.</button></section>
 
-<!-- ===== MODAL ===== -->
+<!-- ===== MODAL MEMÓRIAS ===== -->
 <div id="memoriesModal">
   <div class="memories-box">
     <img id="memoryImage">
@@ -269,24 +434,32 @@ function createRain(){
 }
 createRain();
 
+/* POEMA */
+function openPoem(){
+  document.getElementById("poemModal").style.display="flex";
+}
+function closePoem(){
+  document.getElementById("poemModal").style.display="none";
+}
+
 /* MEMÓRIAS */
 const memories=[
   { img:"jogoveneno.jpeg", text:"Perdi 4 seguidas, porém amei estar com meu amor e perder pra ela... =3" },
   { img:"jokers.jpeg", text:"Nossos queridinhos, não esqueci assim como me encanto em seus detalhes ... 𝓡" },
-  { img:"madameff.jpeg", text:"O dia que eu tasva fofinho kkkk agente tava jogando de terror mor." },
-  { img:"tuqmanda.jpeg", text:"Sabe que manda em mim meu pedacinho do céu, pois tudo compete a é eu te amar pra sempre." },
+  { img:"madameff.jpeg", text:"O dia que eu tavsa fofinho kkkk agente tava jogando de terror mor." },
+  { img:"tuqmanda.jpeg", text:"Sabe que manda em mim meu pedacinho do céu, pois tudo compete a eu te amar pra sempre." },
   { img:"vestidinho.jpeg", text:"Sua Diva!" },
   { img:"totoro.jpeg", text:"Esse dia eu fiquei 4 dias sem saber o que comentar... voce sabia que tava entalado um EU TE AMO." },
   { img:"poema.jpeg", text:"Me lembro do dia que lhe levei ali e estávamos em call... dia perfeito <3" },
-  { img:"pochacco.jpeg", text:"Me lembro que deu uma questão de preocupação... foi audacioso da minha parte pois eu não tinha me declarado e estava com vergonha. Mas você ficou lindo meu amor" },
+  { img:"pochacco.jpeg", text:"Me lembro que deu uma questão de preocupação... foi audacioso da minha parte pois eu não tinha me declarado e estava com vergonha. Mas você ficou linda meu amor" },
   { img:"comilao.jpeg", text:"Eu lembro que te procurei bastante... ainda uso essa foto até hoje. Te amo." },
   { img:"pelucias.jpeg", text:"Meu amor me trancou numa casinha nesse mapa kkkk" },
   { img:"presente1.jpeg", text:"Como eu poderia esquecer ? ..." },
   { img:"presente2.jpeg", text:"Espero que tenha amado cada detalhe, eu sonho agora com seu sim todo dia meu amor, minha princesa <3 " },
-  { img:"rosas.jpeg", text:"Quando sentir saudade, venha aqui... por enquanto não estou presente com voce, mas saiba que prea sempre eu te amo com alma e amor, e minha alma lhe deseja cada dia mais Renata..." }
+  { img:"rosas.jpeg", text:"Quando sentir saudade, venha aqui... por enquanto não estou presente com voce, mas saiba que pra sempre eu te amo..." }
 ];
 
-let current=0;
+let current = 0;
 
 function openMemories(){
   document.getElementById("memoriesModal").style.display="flex";
@@ -298,17 +471,17 @@ function closeMemories(){
 }
 
 function showMemory(){
-  memoryImage.src = memories[current].img;
-  memoryText.innerText = memories[current].text;
+  document.getElementById("memoryImage").src = memories[current].img;
+  document.getElementById("memoryText").innerText = memories[current].text;
 }
 
 function nextMemory(){
-  current = (current+1)%memories.length;
+  current = (current+1) % memories.length;
   showMemory();
 }
 
 function prevMemory(){
-  current = (current-1+memories.length)%memories.length;
+  current = (current-1 + memories.length) % memories.length;
   showMemory();
 }
 
@@ -316,4 +489,3 @@ function prevMemory(){
 
 </body>
 </html>
-
