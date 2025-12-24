@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Eterna Dona</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:"Georgia",serif;
+      background-color:#f6f4ef;
+      color:#1c1c1c;
+      line-height:1.7;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    /* ======== CHUVA ======== */
+    .rain{
+      pointer-events:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      z-index:5;
+    }
+
+    .emoji{
+      position:absolute;
+      font-size:28px;
+      animation: fall linear infinite;
+      opacity:0.9;
+    }
+
+    @keyframes fall{
+      0% { transform:translateY(-10vh) rotate(0deg); opacity:1; }
+      100% { transform:translateY(110vh) rotate(360deg); opacity:0; }
+    }
+
+    /* ======== SEÇÕES ======== */
+    section{
+      max-width:480px; /* tamanho perfeito para celular */
+      margin:auto;
+      padding:50px 20px;
+      opacity:0;
+      transform:translateY(30px);
+      transition:all 1s ease;
+      border-left:2px solid rgba(255,170,200,0.5);
+      border-right:2px solid rgba(255,170,200,0.5);
+      border-radius:12px;
+      box-shadow:0 0 18px rgba(255,150,200,0.25);
+      backdrop-filter:blur(2px);
+    }
+
+    section.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    h1,h2{
+      text-align:center;
+      margin-bottom:30px;
+      font-weight:normal;
+    }
+
+    .texto{
+      white-space:pre-line;
+      text-align:center;
+      font-style:italic;
+    }
+
+    /* ======== GALERIA RESPONSIVA ======== */
+    .galeria{
+      display:flex;
+      flex-direction:column;
+      gap:35px;
+    }
+
+    .foto-box{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .foto-box img{
+      width:100%;
+      max-width:350px;
+      height:auto;
+      border-radius:16px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.15);
+      object-fit:cover;
+    }
+
+    .legenda{
+      margin-top:12px;
+      text-align:center;
+      font-style:italic;
+      min-height:40px;   /* espaço para você escrever */
+      color:#444;
+    }
+
+    /* ===== BOTÃO ===== */
+    .btn-memories{
+      margin-top:30px;
+      padding:14px 36px;
+      font-size:18px;
+      border-radius:30px;
+      border:1px solid #333;
+      background:transparent;
+      cursor:pointer;
+      display:block;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    /* ===== MODAL ===== */
+    #memoriesModal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.65);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+    }
+
+    .memories-box{
+      background:#f6f4ef;
+      width:90%;
+      max-width:380px;
+      padding:25px;
+      border-radius:20px;
+      text-align:center;
+    }
+
+    .memories-box img{
+      width:100%;
+      border-radius:14px;
+      margin-bottom:15px;
+    }
+
+    /* ===== INTRO ===== */
+    #intro{
+      position:fixed;
+      inset:0;
+      background:radial-gradient(circle,#f6f4ef 60%,#e7e2d8);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:10000;
+    }
+
+    .intro-box{
+      padding:40px 50px;
+      text-align:center;
+      border-radius:22px;
+      background:rgba(255,255,255,0.85);
+      border:2px solid rgba(0,0,0,0.2);
+      box-shadow:0 0 35px rgba(0,0,0,0.2);
+    }
+
+    .intro-box p{
+      font-size:22px;
+      font-style:italic;
+      margin-bottom:20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===== CHUVA ===== -->
+<div class="rain" id="rain"></div>
+
+<!-- ===== INTRO ===== -->
+<div id="intro">
+  <div class="intro-box">
+    <p>Ti amo my 𝓡</p>
+    <button onclick="startLove()">Começar nossa música</button>
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="cantosereia.mp3" type="audio/mpeg">
+</audio>
+
+<section><h2>Para Minha Eterna Dona, meu amor,
+     eu me emocionei fazendo não nego isso, lembre que quando sentir saudade pode vir aqui rever nossas recordações;
+        Espero que Goste meu amor.
+        Te Amo Renata
+        by your pochacco...</h2></section>
+
+<section>
+  <h2>Minha Declaração</h2>
+  <div class="texto">Declaração aqui.</div>
+</section>
+
+<!-- ===== GALERIA CORRIGIDA ===== -->
+<section>
+  <h2>Nossas Recordações</h2>
+
+  <div class="galeria">
+
+    <div class="foto-box">
+      <img src="jogoveneno.jpeg">
+      <div class="legenda"></div>
+    </div>
+
+    
+  </div>
+
+  <button class="btn-memories" onclick="openMemories()">Ver nossas recordações 💞</button>
+</section>
+
+<section id="final"><button class="btn-memories">…E Eternamente assim, no fim de tudo, é você.</button></section>
+
+<!-- ===== MODAL ===== -->
+<div id="memoriesModal">
+  <div class="memories-box">
+    <img id="memoryImage">
+    <div class="memories-text" id="memoryText"></div>
+    <div class="memories-controls">
+      <button onclick="prevMemory()">◀</button>
+      <button onclick="closeMemories()">Fechar</button>
+      <button onclick="nextMemory()">▶</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* REVEAL */
+const sections = document.querySelectorAll("section");
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add("visible");
+  });
+});
+sections.forEach(section=>observer.observe(section));
+
+function startLove(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("music").play();
+}
+
+/* CHUVA */
+function createRain(){
+  const rain = document.getElementById("rain");
+  const emojis = ["💖","💍","💋"];
+
+  setInterval(()=>{
+    const e = document.createElement("div");
+    e.className="emoji";
+    e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left = Math.random()*100+"vw";
+    e.style.animationDuration = (4 + Math.random()*4)+"s";
+    rain.appendChild(e);
+
+    setTimeout(()=>e.remove(),8000);
+  },250);
+}
+createRain();
+
+/* MEMÓRIAS */
+const memories=[
+  { img:"jogoveneno.jpeg", text:"Perdi 4 seguidas, porém amei estar com meu amor e perder pra ela... =3" },
+  { img:"jokers.jpeg", text:"Nossos queridinhos, não esqueci assim como me encanto em seus detalhes ... 𝓡" },
+  { img:"madameff.jpeg", text:"O dia que eu tasva fofinho kkkk agente tava jogando de terror mor." },
+  { img:"tuqmanda.jpeg", text:"Sabe que manda em mim meu pedacinho do céu, pois tudo compete a é eu te amar pra sempre." },
+  { img:"vestidinho.jpeg", text:"Sua Diva!" },
+  { img:"totoro.jpeg", text:"Esse dia eu fiquei 4 dias sem saber o que comentar... voce sabia que tava entalado um EU TE AMO." },
+  { img:"poema.jpeg", text:"Me lembro do dia que lhe levei ali e estávamos em call... dia perfeito <3" },
+  { img:"pochacco.jpeg", text:"Me lembro que deu uma questão de preocupação... foi audacioso da minha parte pois eu não tinha me declarado e estava com vergonha. Mas você ficou lindo meu amor" },
+  { img:"comilao.jpeg", text:"Eu lembro que te procurei bastante... ainda uso essa foto até hoje. Te amo." },
+  { img:"pelucias.jpeg", text:"Meu amor me trancou numa casinha nesse mapa kkkk" },
+  { img:"presente1.jpeg", text:"Como eu poderia esquecer ? ..." },
+  { img:"presente2.jpeg", text:"Espero que tenha amado cada detalhe, eu sonho agora com seu sim todo dia meu amor, minha princesa <3 " },
+  { img:"rosas.jpeg", text:"Quando sentir saudade, venha aqui... por enquanto não estou presente com voce, mas saiba que prea sempre eu te amo com alma e amor, e minha alma lhe deseja cada dia mais Renata..." }
+];
+
+let current=0;
+
+function openMemories(){
+  document.getElementById("memoriesModal").style.display="flex";
+  showMemory();
+}
+
+function closeMemories(){
+  document.getElementById("memoriesModal").style.display="none";
+}
+
+function showMemory(){
+  memoryImage.src = memories[current].img;
+  memoryText.innerText = memories[current].text;
+}
+
+function nextMemory(){
+  current = (current+1)%memories.length;
+  showMemory();
+}
+
+function prevMemory(){
+  current = (current-1+memories.length)%memories.length;
+  showMemory();
+}
+
+</script>
+
+</body>
+</html>
